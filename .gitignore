@@ -1,0 +1,14 @@
+# project specific
+ndoe_modules
+tmp
+**.log
+*.tmp*
+.changelog
+coverage
+.nyc_output/
+.env
+*.progress-estimator
+packages/micro/prisma/client
+packages/micro/prisma/graphql
+dist
+.volumes
