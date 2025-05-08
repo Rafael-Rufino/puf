@@ -7,7 +7,11 @@
     "email": "rafaelrufino.52@gmail.com"
   },
   "scripts": {
-    "fix": "eslint --fix",
+    "fix": "run-s \"fix:* {@}\" --",
+    "fix:lint": "eslint --fix --no-error-on-unmatched-pattern",
+    "fix:format": "prettier --write",
+    "format": "yarn fix:format 'src/**/*.{js|ts|md|json}'",
+    "lint": "yarn fix:lint 'src/**/*.{js|ts|md|json}'",
     "prepare": "husky"
   },
   "commitlint": {
