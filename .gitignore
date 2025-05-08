@@ -12,3 +12,4 @@ packages/micro/prisma/client
 packages/micro/prisma/graphql
 dist
 .volumes
+node_modules

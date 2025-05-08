@@ -6,6 +6,26 @@
     "name": "Rafael Rufino",
     "email": "rafaelrufino.52@gmail.com"
   },
+  "scripts": {
+    "fix": "eslint --fix",
+    "prepare": "husky"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "./src/**/*.{js,json,md}": [
+      "yarn fix"
+    ]
+  },
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2"
+  }
 }
