@@ -14,7 +14,7 @@
     "lint": "yarn fix:lint 'src/**/*.{js|ts|md|json}'",
     "prepare": "husky install",
     "prebuild": "rm -Rf ./dist",
-    "dev": "nodemon --exec babel-node src/index.js",
+    "dev": "nodemon --exec babel-node -- -r dotenv-safe/config src/index.js",
     "build": "babel src --extensions \".js\" --ignore \"*.spec.js,*.test.js\" '.js,.ts' --copy-files --out-dir dist"
   },
   "commitlint": {
@@ -46,5 +46,11 @@
     "lint-staged": "^15.5.2",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3"
+  },
+  "dependencies": {
+    "@koa/router": "^13.1.0",
+    "dotenv": "^16.5.0",
+    "koa": "^3.0.0",
+    "koa-bodyparser": "^4.4.1"
   }
 }
