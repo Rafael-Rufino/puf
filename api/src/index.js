@@ -1,4 +1,5 @@
-import 'dotenv/config'
+import 'dotenv-safe/config'
+
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import { router } from './routes'
