@@ -1,0 +1,149 @@
+type: collection.insomnia.rest/5.0
+name: API_PUF
+meta:
+  id: wrk_015087e03b2a4b7685ddc047677bd749
+  created: 1747181300768
+  modified: 1747194728348
+collection:
+  - name: Users
+    meta:
+      id: fld_b52f793850e2411895aaaac27d609721
+      created: 1747195465372
+      modified: 1747195465372
+      sortKey: -1747195465372
+    children:
+      - url: "{{ _.BASE_URL }}/users/cmandm55l0000ovng54q5bedo"
+        name: Delete User
+        meta:
+          id: req_f088e98b45414d76a15f4545193905e8
+          created: 1747181301086
+          modified: 1747195693002
+          isPrivate: false
+          sortKey: -1747195470652
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/users"
+        name: Create User
+        meta:
+          id: req_1c6995eab66f4931aff4d0d2095eec0f
+          created: 1747194752609
+          modified: 1747195661800
+          isPrivate: false
+          sortKey: -1747195470602
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Betinho",
+            	"email": "beto@gmail.com",
+            	"password": "12345678"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/users/cmands7ul0000ov6kp0tv4zo2"
+        name: Update User
+        meta:
+          id: req_4c443c2b6c5349549c78330777bd716d
+          created: 1747194775231
+          modified: 1747195684325
+          isPrivate: false
+          sortKey: -1747195470627
+        method: PUT
+        body:
+          mimeType: application/json
+          text: "{
+
+            \t\t\"name\": \"Maicon silva\",
+
+            \t\t\"email\": \"maicon@gmail.com\",
+
+            \t\t\"password\": \"12345678\"
+
+            }
+
+            \t"
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/users"
+        name: Get List User
+        meta:
+          id: req_8f45570b74fd460796368a99d1730c45
+          created: 1747194812584
+          modified: 1747195669453
+          isPrivate: false
+          sortKey: -1747195470702
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Auth
+    meta:
+      id: fld_340acfadbf134d36a30a599d4a0a9274
+      created: 1747195486663
+      modified: 1747195486663
+      sortKey: -1747195486663
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_7ce66902443946107857371d229e1c90d005b20d
+    created: 1747181300777
+    modified: 1747181300777
+environments:
+  name: Base Environment
+  meta:
+    id: env_7ce66902443946107857371d229e1c90d005b20d
+    created: 1747181300773
+    modified: 1747181300773
+    isPrivate: false
+  subEnvironments:
+    - name: Local
+      meta:
+        id: env_ce1d57923487426e8ba1569fe5e879ff
+        created: 1747195502088
+        modified: 1747195608757
+        isPrivate: false
+        sortKey: 1747195502088
+      data:
+        BASE_URL: http://localhost:9901
+      color: "#1293e2"
