@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client'
+import bcrypt from 'bcrypt'
+
 const prisma = new PrismaClient()
 
 export const list = async ctx => {
@@ -15,9 +17,23 @@ export const create = async ctx => {
   try {
     const { name, email, password } = ctx.request.body
 
+    const saltRounds = 10
+    const hashedPassword = await bcrypt.hash(
+      ctx.request.body.password,
+      saltRounds
+    )
+
     if (!email || !password) {
       ctx.status = 400
       ctx.body = { error: 'Email and password are required.' }
+      return
+    }
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    })
+    if (existingUser) {
+      ctx.status = 409
+      ctx.body = { error: 'Email already exists.' }
       return
     }
 
@@ -25,7 +41,7 @@ export const create = async ctx => {
       data: {
         name,
         email,
-        password,
+        password: hashedPassword,
       },
     })
 
