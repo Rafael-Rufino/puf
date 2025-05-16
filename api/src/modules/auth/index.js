@@ -3,8 +3,20 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 const prisma = new PrismaClient()
 
+// type: Basic
+// credentials: base64(email:password)
+
 export const login = async ctx => {
-  const { email, password } = ctx.request.body
+  const [type, credentials] = ctx.request.headers.authorization.split(' ')
+
+  if (type !== 'Basic') {
+    ctx.status = 401
+    ctx.body = { error: 'Invalid authentication type.' }
+    return
+  }
+  const [email, password] = Buffer.from(credentials, 'base64')
+    .toString('utf8')
+    .split(':')
 
   try {
     const user = await prisma.user.findUnique({
