@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 const prisma = new PrismaClient()
 
@@ -6,24 +7,19 @@ export const login = async ctx => {
   const { email, password } = ctx.request.body
 
   try {
-    const [user] = await prisma.user.findMany({
-      where: { email, password },
+    const user = await prisma.user.findUnique({
+      where: { email },
     })
     if (!email || !password) {
       ctx.status = 400
       ctx.body = { error: 'Email and password are required.' }
       return
     }
+    const passwordEqual = await bcrypt.compare(password, user.password)
 
-    if (!user) {
+    if (!user || !passwordEqual) {
       ctx.status = 404
       ctx.body = { error: 'User not found.' }
-      return
-    }
-
-    if (!user || user.password !== password) {
-      ctx.status = 401
-      ctx.body = { error: 'Invalid email or password.' }
       return
     }
 
