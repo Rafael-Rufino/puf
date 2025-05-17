@@ -14,7 +14,7 @@ describe('Auth Router', () => {
 
     expect(response.status).toBe(200)
   })
-  it('should login user by credentials', async () => {
+  it('should return logged in user by correct credentials', async () => {
     const email = 'rufi@gmail.com'
     const password = '12345678'
 
@@ -23,6 +23,10 @@ describe('Auth Router', () => {
       .auth(email, password)
 
     expect(result.status).toBe(200)
+    expect(result.body).toBeTruthy()
+    expect(result.body.user.id).toBeTruthy()
+    expect(result.body.user.password).toBeFalsy()
+    expect(result.body.token).toBeTruthy()
   })
 
   it('should return not found with wrong email', async () => {
