@@ -1,6 +1,6 @@
 import Router from '@koa/router'
-import * as auth from './modules/auth'
-import * as users from './modules/users'
+import * as auth from '../modules/auth'
+import * as users from '../modules/users'
 
 export const router = new Router()
 
