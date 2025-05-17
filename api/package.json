@@ -12,7 +12,7 @@
     "fix:format": "prettier --write",
     "format": "yarn fix:format 'src/**/*.{js|ts|md|json}'",
     "lint": "yarn fix:lint 'src/**/*.{js|ts|md|json}'",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prebuild": "rm -Rf ./dist",
     "dev": "nodemon --exec babel-node -- -r dotenv-safe/config src/index.js",
     "build": "babel src --extensions \".js\" --ignore \"*.spec.js,*.test.js\" '.js,.ts' --copy-files --out-dir dist",
@@ -28,6 +28,11 @@
       "yarn fix"
     ]
   },
+
+  "hooks": {
+    "pre-commit": "npm test"
+  },
+
   "license": "MIT",
   "private": false,
   "devDependencies": {
