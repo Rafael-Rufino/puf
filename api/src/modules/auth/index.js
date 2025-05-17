@@ -8,27 +8,38 @@ export const login = async ctx => {
     const [email, password] = decodeBasicToken(
       ctx.request.headers.authorization
     )
-    const user = await prisma.user.findUnique({
-      where: { email },
-    })
+
     if (!email || !password) {
       ctx.status = 400
       ctx.body = { error: 'Email and password are required.' }
       return
     }
-    const passwordEqual = await bcrypt.compare(password, user.password)
 
-    if (!user || !passwordEqual) {
+    const user = await prisma.user.findUnique({
+      where: { email },
+    })
+
+    if (!user) {
       ctx.status = 404
       ctx.body = { error: 'User not found.' }
+      return
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password)
+
+    if (!isPasswordValid) {
+      ctx.status = 401
+      ctx.body = { error: 'credentials are invalid.' }
       return
     }
 
     const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     })
+    const { password: _, ...userWithoutPassword } = user
+    ctx.body = { user: userWithoutPassword, token }
 
-    ctx.body = { user, token }
+    ctx.status = 200
   } catch (error) {
     console.error(error)
     ctx.status = 500
