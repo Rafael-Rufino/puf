@@ -28,11 +28,9 @@
       "yarn fix"
     ]
   },
-
   "hooks": {
     "pre-commit": "npm test"
   },
-
   "license": "MIT",
   "private": false,
   "devDependencies": {
@@ -53,7 +51,8 @@
     "lint-staged": "^15.5.2",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3",
-    "prisma": "^6.7.0"
+    "prisma": "^6.7.0",
+    "supertest": "^7.1.1"
   },
   "dependencies": {
     "@koa/router": "^13.1.0",
