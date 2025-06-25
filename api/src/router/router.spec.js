@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken'
 import request from 'supertest'
 import { app } from '../server'
 
@@ -49,5 +50,17 @@ describe('Auth Router', () => {
       .auth(email, password)
 
     expect(result.status).toBe(401)
+  })
+
+  it('should return token with correct credentials', async () => {
+    const email = 'rufi@gmail.com'
+    const password = '12345678'
+
+    const result = await request(server)
+      .get('/auth/login')
+      .auth(email, password)
+    const decodedToken = jwt.verify(result.body.token, process.env.JWT_SECRET)
+
+    expect(decodedToken.sub).toBe(result.body.user.id)
   })
 })

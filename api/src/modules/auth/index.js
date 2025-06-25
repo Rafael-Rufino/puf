@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { prisma } from '../../data'
 import { decodeBasicToken } from '../auth/services'
@@ -16,7 +15,7 @@ export const login = async ctx => {
     }
 
     const user = await prisma.user.findUnique({
-      where: { email },
+      where: { email, password },
     })
 
     if (!user) {
@@ -25,13 +24,13 @@ export const login = async ctx => {
       return
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password)
+    // const isPasswordValid = await bcrypt.compare(password, user.password)
 
-    if (!isPasswordValid) {
-      ctx.status = 401
-      ctx.body = { error: 'credentials are invalid.' }
-      return
-    }
+    // if (!isPasswordValid) {
+    //   ctx.status = 401
+    //   ctx.body = { error: 'credentials are invalid.' }
+    //   return
+    // }
 
     const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
       expiresIn: '1h',
